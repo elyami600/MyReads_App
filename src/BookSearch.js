@@ -8,24 +8,29 @@ class BookSearch extends Component {
         searchedBooks:[]
     }
 
-    updateQuery = async (query) => {
-        this.setState({ query });
-        await BooksAPI.search(query).then((books) =>
-          this.setState({ searchedBooks: books })
-        );
-      };
-    
+    updateQuery = (query) => {
+        this.setState({query}, () => {
+            if(query.trim().length > 0) {
+                BooksAPI.search(query.trim()).then((books) => {
+                    if(books.length > 0) {
+                        this.setState({searchedBooks : books})
+                    } else {
+                        this.setState({searchedBooks :[]})
+                    }
+                })  
+            }
+            else {
+                this.setState({searchedBooks:[]})
+            }
+
+        })
+    }
       
     render() {
         //console.log("BookSearch ",this.props)
-        const searchedStories = this.state.searchedBooks.filter(book => 
-            book.title.toLowerCase().includes(this.state.query.toLowerCase())
-          );
-        // const searchedStories = this.state.query === ''
-        // ? []
-        // : this.state.searchedBooks.filter(book =>
-        //     book.title.toLowerCase().includes(this.state.query.toLowerCase())
-        //   );
+        const{ query, searchedBooks } = this.state
+        const searchedStories = searchedBooks.filter(book => book.title.toLowerCase().includes(query.toLowerCase()));
+       
         
         return(
             <div>
@@ -39,7 +44,7 @@ class BookSearch extends Component {
                         <input 
                         type="text"
                          placeholder="Search by title or author"
-                         value={this.state.query}
+                         value={query}
                          onChange={(event) => this.updateQuery(event.target.value)}
                          /> 
                         </div>
