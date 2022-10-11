@@ -8,19 +8,20 @@ class BookSearch extends Component {
         searchedBooks:[]
     }
 
+
     updateQuery = (query) => {
-        this.setState({query}, () => {
+        this.setState({ query }, () => {
             if(query.trim().length > 0) {
                 BooksAPI.search(query.trim()).then((books) => {
                     if(books.length > 0) {
-                        this.setState({searchedBooks : books})
+                        this.setState({ searchedBooks : books })
                     } else {
-                        this.setState({searchedBooks :[]})
+                        this.setState({ searchedBooks :[] })
                     }
                 })  
             }
             else {
-                this.setState({searchedBooks:[]})
+                this.setState({ searchedBooks:[] })
             }
 
         })
@@ -29,9 +30,8 @@ class BookSearch extends Component {
     render() {
         //console.log("BookSearch ",this.props)
         const{ query, searchedBooks } = this.state
-        const searchedStories = searchedBooks.filter(book => book.title.toLowerCase().includes(query.toLowerCase()));
-       
-        
+        const searchedStories = searchedBooks.filter(book => 
+            book.title.toLowerCase().includes(query.toLowerCase()));
         return(
             <div>
                 <div className="search-books">
