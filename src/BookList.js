@@ -8,7 +8,9 @@ class BookList extends Component {
                 <li key={this.props.bookey}>
                     <div className="book">
                             <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.bookImageLinks})` }}></div>
+                            <div className="book-cover" style={{ width: 128, height: 193}} >
+                            <img src={this.props.bookImageLinks && this.props.bookImageLinks.thumbnail} alt="img" />
+                            </div>
                             <div className="book-shelf-changer">
                             <select >
                                 <option value="move" disabled>Move to...</option>
