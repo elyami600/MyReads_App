@@ -1,5 +1,6 @@
 import React,{Component} from "react";
 import { Link } from "react-router-dom";
+import BookList from "./BookList";
 import * as BooksAPI from './BooksAPI'
 
 class BookSearch extends Component {
@@ -8,11 +9,10 @@ class BookSearch extends Component {
         searchedBooks:[]
     }
 
-
     updateQuery = (query) => {
         this.setState({ query }, () => {
             if(query.trim().length > 0) {
-                BooksAPI.search(query.trim()).then((books) => {
+                BooksAPI.search(query.trim(),1000).then((books) => {
                     if(books.length > 0) {
                         this.setState({ searchedBooks : books })
                     } else {
@@ -52,25 +52,14 @@ class BookSearch extends Component {
                     <div className="search-books-results"> 
                         <ol className="books-grid">
                             {searchedStories.map((book) => (
-                                <li key={book.id}>
-                                    <div className="book">
-                                        <div className="book-top">
-                                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-                                        <div className="book-shelf-changer">
-                                        <select >
-                                            <option value="move" disabled>Move to...</option>
-                                            <option value="currentlyReading">Currently Reading</option>
-                                            <option value="wantToRead">Want to Read</option>
-                                            <option value="read">Read</option>
-                                            <option value="none">None</option>
-                                        </select>
-                                        </div>
-                                    </div>
-                                    <div className="book-title">{book.title}</div>
-                                    <div className="book-authors">{book.authors}</div>
-                                </div>
-                                    
-                                </li>
+                                <BookList 
+                                key={book.id}
+                                bookey={book.id}
+                                bookImageLinks={book.imageLinks.smallThumbnail}
+                                bookTitle={book.title}
+                                bookAuthors={book.authors}
+
+                                />
                             ))}
                         
                         </ol>
