@@ -33,7 +33,11 @@ class BooksApp extends React.Component {
       showSearchPage: true
     }))
   }
-
+  handleUpdateShelf = (book,shelf) => {
+    BooksAPI.update(book,shelf).then((response) => {
+      console.log("update shelf -> ", response)
+    })
+  }
 
   render() {
     console.log('Hellouuuu!!!!!!!!!!!!')
@@ -47,6 +51,7 @@ class BooksApp extends React.Component {
           }/>
           <Route exact path='/search' element={
             <BookSearch
+            handleUpdateShelf={this.handleUpdateShelf}
             />
           }/>
          </Routes>
