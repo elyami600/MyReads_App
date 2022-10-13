@@ -6,7 +6,8 @@ import * as BooksAPI from './BooksAPI'
 class BookSearch extends Component {
     state = {
         query:'',
-        searchedBooks:[]
+        searchedBooks:[],
+        value:''
     }
 
     updateQuery = (query) => {
@@ -26,10 +27,12 @@ class BookSearch extends Component {
 
         })
     }
+  
       
     render() {
         //console.log("BookSearch ",this.props)
         const{ query, searchedBooks } = this.state
+        const { handleUpdateShelf } = this.props
         const searchedStories = searchedBooks.filter(book => 
             book.title.toLowerCase().includes(query.toLowerCase()));
         return(
@@ -57,10 +60,14 @@ class BookSearch extends Component {
                                 bookey={book.id}
                                 bookImageLinks={book.imageLinks}
                                 bookTitle={book.title}
-                                bookAuthors={book.authors}
+                                bookAuthors={book.authors} 
+                                /* =------update-------= */
+                                value={this.state.value}
+                                handleUpdateShelf={(event) => handleUpdateShelf(book,event.target.value)}
 
-                                />
-            
+
+                                
+                                 />
                             ))}
                         
                         </ol>
