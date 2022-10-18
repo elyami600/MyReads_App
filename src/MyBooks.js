@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 class MyBooks extends Component {
     render() {
-        console.log("MyBooks props ", this.props)
+        // console.log("MyBooks props ", this.props)
         return(
             <div>
                  <div className="list-books">
