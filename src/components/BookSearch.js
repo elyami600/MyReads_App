@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from '../BooksAPI'
 
 class BookSearch extends Component {
     state = {
@@ -27,7 +27,7 @@ class BookSearch extends Component {
     }
      
     render() {
-        
+
         const{ query, searchedBooks } = this.state
         const { handleUpdateShelf } = this.props
         const searchedStories = searchedBooks.filter(book => 
