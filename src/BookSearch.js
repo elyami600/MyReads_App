@@ -20,17 +20,14 @@ class BookSearch extends Component {
                         this.setState({ searchedBooks :[] })
                     }
                 })  
-            }
-            else {
+            } else {
                 this.setState({ searchedBooks:[] })
             }
-
         })
     }
-  
-      
+     
     render() {
-        //console.log("BookSearch ",this.props)
+        
         const{ query, searchedBooks } = this.state
         const { handleUpdateShelf } = this.props
         const searchedStories = searchedBooks.filter(book => 
@@ -62,12 +59,8 @@ class BookSearch extends Component {
                                 bookTitle={book.title}
                                 bookAuthors={book.authors} 
                                 /* =------update-------= */
-                                value={this.state.value}
-                                handleUpdateShelf={(event) => handleUpdateShelf(book,event.target.value)}
-
-
-                                
-                                 />
+                                value={book.shelf}
+                                handleUpdateShelf={(event) => handleUpdateShelf(book,event.target.value)}/>
                             ))}
                         
                         </ol>
