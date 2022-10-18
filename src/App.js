@@ -15,11 +15,6 @@ class BooksApp extends React.Component {
      */
     books:[],
     showSearchPage: false,
-    currentlyReading:[],
-    wantToRead:[],
-    read:[]
-
-   
   }
 
   componentDidMount() {
@@ -28,6 +23,7 @@ class BooksApp extends React.Component {
       books
       }))
     })
+    console.log(this.state.books)
   }
   
   NavigatePage = () => {
@@ -37,12 +33,15 @@ class BooksApp extends React.Component {
   }
 
   handleUpdateShelf = (book, shelf) => {
-     BooksAPI.update(book, shelf);
-     this.setState(({ books }) => ({
-       books: [...books.filter(({ id }) => id !== book.id), { ...book, shelf }],
-     }));
-     console.log("this.state.books ",this.state.books)
-   };
+    BooksAPI.update(book, shelf);
+    book.shelf = shelf;
+    this.setState(state => ({
+      books: state.books
+      .filter(b => b.id !== book.id).concat(book),
+    }));
+    console.log(this.state.books)
+   }
+
   render() {
     // console.log('Hello App')
     return (
@@ -51,6 +50,8 @@ class BooksApp extends React.Component {
           <Route exact path='/' element={
             <MyBooks 
             onNavigate={this.NavigatePage}
+            books={this.state.books}
+            handleUpdateShelf={this.handleUpdateShelf}
             />
           }/>
           <Route exact path='/search' element={
