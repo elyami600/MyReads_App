@@ -5,6 +5,10 @@ import BookList from "./BookList";
 class MyBooks extends Component {
     render() {
         // console.log("MyBooks props ", this.props)
+    //  book.shelf && book.shelf
+      const currentlyReading = this.props.books.filter(book => book.shelf && book.shelf === "currentlyReading");
+      const wantToRead = this.props.books.filter(book => book.shelf && book.shelf === "wantToRead");
+      const read = this.props.books.filter(book => book.shelf && book.shelf === "read");
         return(
             <div>
                  <div className="list-books">
@@ -18,7 +22,7 @@ class MyBooks extends Component {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.map((book) => book.shelf && book.sheld === "CurrentlyReading" && (
+                    {currentlyReading.map((book) => currentlyReading && (
                       <BookList 
                       key={book.id}
                       bookey={book.id}
@@ -26,7 +30,7 @@ class MyBooks extends Component {
                       bookTitle={book.title}
                       bookAuthors={book.authors} 
                       /* =------update-------= */
-                      value={this.state.value}
+                      value={book.shelf}
                       handleUpdateShelf={(event) => this.props.handleUpdateShelf(book,event.target.value)}/>
                     ))}
                     </ol>
@@ -36,7 +40,7 @@ class MyBooks extends Component {
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.map((book) =>  book.shelf && book.sheld === "WanttoRead" && (
+                    {wantToRead.map((book) => wantToRead && (
                       <BookList 
                       key={book.id}
                       bookey={book.id}
@@ -44,7 +48,8 @@ class MyBooks extends Component {
                       bookTitle={book.title}
                       bookAuthors={book.authors} 
                       /* =------update-------= */
-                      value={this.state.value}
+                      value={book.shelf}
+                    
                       handleUpdateShelf={(event) => this.props.handleUpdateShelf(book,event.target.value)}/>
                     ))}
                     </ol>
@@ -54,7 +59,7 @@ class MyBooks extends Component {
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.map((book) => book.shelf && book.sheld === "Read" &&(
+                    {read.map((book) =>  read && (
                       <BookList 
                       key={book.id}
                       bookey={book.id}
@@ -62,7 +67,7 @@ class MyBooks extends Component {
                       bookTitle={book.title}
                       bookAuthors={book.authors} 
                       /* =------update-------= */
-                      value={this.state.value}
+                      value={book.shelf}
                       handleUpdateShelf={(event) => this.props.handleUpdateShelf(book,event.target.value)}/>
                     ))}
                     </ol>
