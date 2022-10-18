@@ -14,7 +14,7 @@ class BookList extends Component {
                             <img src={bookImageLinks && bookImageLinks.thumbnail} alt="img" />
                             </div>
                             <div className="book-shelf-changer">
-                            <select value={this.props.value}  onChange={this.props.handleUpdateShelf}>
+                            <select value={this.props.value}   onChange={this.props.handleUpdateShelf}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
