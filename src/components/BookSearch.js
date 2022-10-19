@@ -28,7 +28,7 @@ class BookSearch extends Component {
      
     render() {
 
-        const{ query, searchedBooks } = this.state
+        const { query, searchedBooks } = this.state
         const { handleUpdateShelf } = this.props
         const searchedStories = searchedBooks.filter(book => 
             book.title.toLowerCase().includes(query.toLowerCase()));
