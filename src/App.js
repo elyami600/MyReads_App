@@ -6,11 +6,14 @@ import MyBooks from './components/MyBooks'
 import { Route, Routes } from 'react-router-dom'
 
 class BooksApp extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     books:[],
     showSearchPage: false,
+    }
   }
-
+  
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState(() => ({
@@ -51,10 +54,6 @@ class BooksApp extends React.Component {
             />
           }/>
          </Routes>
-          
-      
-       
-       
       </div>
     )
   }
