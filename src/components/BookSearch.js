@@ -55,11 +55,11 @@ class BookSearch extends Component {
                                 <BookList 
                                 key={book.id}
                                 bookey={book.id}
-                                bookImageLinks={book.imageLinks}
+                                bookImageLinks={book.imageLinks || {}} // if the pimg is undefine 
                                 bookTitle={book.title}
-                                bookAuthors={book.authors} 
+                                bookAuthors={book.authors ? book.authors.join(', ') : "UnKonow Author"} 
                                 /* =------update-------= */
-                                value={book.shelf}
+                                value={book.shelf ? book.shelf : "move"}
                                 handleUpdateShelf={(event) => handleUpdateShelf(book,event.target.value)}/>
                             ))}
                         
@@ -71,3 +71,4 @@ class BookSearch extends Component {
     }
 }
 export default BookSearch;
+// 1. find undefine pic causing an error in the main main page

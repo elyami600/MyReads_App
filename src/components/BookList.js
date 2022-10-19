@@ -5,16 +5,17 @@ class BookList extends Component {
 
     render() {
          const { bookey, bookImageLinks, bookTitle, bookAuthors } = this.props;
+        // const undefinedImage = `http://books.google.com/books/content?id=1yx1tgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api`
         return(
             <div>
                 <li key={bookey}>
                     <div className="book">
                             <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193}} >
-                            <img src={bookImageLinks && bookImageLinks.thumbnail} alt="img" />
+                            <img src={bookImageLinks && bookImageLinks.thumbnail} alt={bookTitle} />
                             </div>
                             <div className="book-shelf-changer">
-                            <select value={this.props.value}   onChange={this.props.handleUpdateShelf}>
+                            <select value={this.props.value || "none"}   onChange={this.props.handleUpdateShelf}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -34,8 +35,8 @@ class BookList extends Component {
 }
 BookList.propTypes = {
     bookey: PropTypes.string.isRequired,
-    bookImageLinks: PropTypes.object.isRequired,
-    bookAuthors: PropTypes.array.isRequired,
+    bookImageLinks: PropTypes.object.isRequired ,
+    bookAuthors: PropTypes.any.isRequired,
     bookTitle: PropTypes.string.isRequired,
     handleUpdateShelf: PropTypes.func.isRequired
 
