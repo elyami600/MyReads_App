@@ -1,17 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
 
-class MyBooks extends Component {
-    render() {
-        // console.log("MyBooks props ", this.props)
-    //  book.shelf && book.shelf
-      const currentlyReading = this.props.books.filter(book => book.shelf && book.shelf === "currentlyReading");
-      const wantToRead = this.props.books.filter(book => book.shelf && book.shelf === "wantToRead");
-      const read = this.props.books.filter(book => book.shelf && book.shelf === "read");
+const MyBooks = (props) => {
+      const currentlyReading = props.books.filter(book => book.shelf && book.shelf === "currentlyReading");
+      const wantToRead       = props.books.filter(book => book.shelf && book.shelf === "wantToRead");
+      const read             = props.books.filter(book => book.shelf && book.shelf === "read");
         return(
-            <div>
-                 <div className="list-books">
+        <div>
+          <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
@@ -31,7 +28,7 @@ class MyBooks extends Component {
                       bookAuthors={book.authors} 
                       /* =------update-------= */
                       value={book.shelf}
-                      handleUpdateShelf={(event) => this.props.handleUpdateShelf(book,event.target.value)}/>
+                      handleUpdateShelf={(event) => props.handleUpdateShelf(book,event.target.value)}/>
                     ))}
                     </ol>
                   </div>
@@ -50,7 +47,7 @@ class MyBooks extends Component {
                       /* =------update-------= */
                       value={book.shelf}
                     
-                      handleUpdateShelf={(event) => this.props.handleUpdateShelf(book,event.target.value)}/>
+                      handleUpdateShelf={(event) => props.handleUpdateShelf(book,event.target.value)}/>
                     ))}
                     </ol>
                   </div>
@@ -68,7 +65,7 @@ class MyBooks extends Component {
                       bookAuthors={book.authors} 
                       /* =------update-------= */
                       value={book.shelf}
-                      handleUpdateShelf={(event) => this.props.handleUpdateShelf(book,event.target.value)}/>
+                      handleUpdateShelf={(event) => props.handleUpdateShelf(book,event.target.value)}/>
                     ))}
                     </ol>
                   </div>
@@ -76,13 +73,13 @@ class MyBooks extends Component {
               </div>
             </div>
              <div className="open-search">
-              <Link to='/search' onClick={() => this.props.onNavigate}>Add a book</Link>
+              <Link to='/search' onClick={() => props.onNavigate}>Add a book</Link>
             </div>
           </div>
           
             </div>
         )
-    }
+    
 
 }
 
