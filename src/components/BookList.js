@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-//import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types';
 
 class BookList extends Component {
+
     render() {
-         //console.log("BookSearch ",this.props)
          const { bookey, bookImageLinks, bookTitle, bookAuthors } = this.props;
         return(
             <div>
@@ -32,4 +32,12 @@ class BookList extends Component {
         )
     }
 }
+BookList.propTypes = {
+    bookey: PropTypes.string.isRequired,
+    bookImageLinks: PropTypes.object.isRequired,
+    bookAuthors: PropTypes.array.isRequired,
+    bookTitle: PropTypes.string.isRequired,
+    handleUpdateShelf: PropTypes.func.isRequired
+
+};
 export default BookList;
