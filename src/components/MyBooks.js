@@ -77,10 +77,7 @@ const MyBooks = (props) => {
             </div>
           </div>
           
-            </div>
-        )
-    
-
+        </div>
+      )
 }
-
 export default MyBooks;
