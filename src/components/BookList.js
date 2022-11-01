@@ -1,11 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 
-class BookList extends Component {
-
-    render() {
-         const { bookey, bookImageLinks, bookTitle, bookAuthors } = this.props;
-        // const undefinedImage = `http://books.google.com/books/content?id=1yx1tgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api`
+function BookList({ bookey, bookImageLinks, bookTitle, bookAuthors , value, handleUpdateShelf}){
         return(
             <div>
                 <li key={bookey}>
@@ -15,7 +11,7 @@ class BookList extends Component {
                             <img src={bookImageLinks && bookImageLinks.thumbnail} alt={bookTitle} />
                             </div>
                             <div className="book-shelf-changer">
-                            <select value={this.props.value || "none"}   onChange={this.props.handleUpdateShelf}>
+                            <select value={value || "none"}   onChange={handleUpdateShelf}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -31,7 +27,7 @@ class BookList extends Component {
                 </li>
             </div>
         )
-    }
+    
 }
 BookList.propTypes = {
     bookey: PropTypes.string.isRequired,
