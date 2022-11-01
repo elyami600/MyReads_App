@@ -55,7 +55,7 @@ class BookSearch extends Component {
                                 <BookList 
                                 key={book.id}
                                 bookey={book.id}
-                                bookImageLinks={book.imageLinks || {}} // if the pimg is undefine 
+                                bookImageLinks={book.imageLinks || {}} // if the img is undefine 
                                 bookTitle={book.title}
                                 bookAuthors={book.authors ? book.authors.join(', ') : "UnKonow Author"} 
                                 /* =------update-------= */
