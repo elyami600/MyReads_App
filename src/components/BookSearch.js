@@ -1,35 +1,29 @@
-import React,{Component} from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
 import * as BooksAPI from '../BooksAPI'
 
-class BookSearch extends Component {
-    state = {
-        query:'',
-        searchedBooks:[],
-        value:''
-    }
 
-    updateQuery = (query) => {
-        this.setState({ query }, () => {
+function BookSearch({ handleUpdateShelf }) {
+    
+    const[query , setQuery] = useState('');
+    const[searchedBooks, setSearchedBooks] = useState([])
+   
+    const updateQuery = (query) => {
+        setQuery(query) 
             if(query.trim().length > 0) {
                 BooksAPI.search(query.trim(),1000).then((books) => {
                     if(books.length > 0) {
-                        this.setState({ searchedBooks : books })
+                        setSearchedBooks(books)
                     } else {
-                        this.setState({ searchedBooks :[] })
+                        setSearchedBooks([])
                     }
                 })  
             } else {
-                this.setState({ searchedBooks:[] })
+                setSearchedBooks([])
             }
-        })
-    }
-     
-    render() {
+        }
 
-        const { query, searchedBooks } = this.state
-        const { handleUpdateShelf } = this.props
         const searchedStories = searchedBooks.filter(book => 
             book.title.toLowerCase().includes(query.toLowerCase()));
         return(
@@ -45,7 +39,7 @@ class BookSearch extends Component {
                         type="text"
                          placeholder="Search by title or author"
                          value={query}
-                         onChange={(event) => this.updateQuery(event.target.value)}
+                         onChange={(event) => updateQuery(event.target.value)}
                          /> 
                         </div>
                     </div>
@@ -60,7 +54,7 @@ class BookSearch extends Component {
                                 bookAuthors={book.authors ? book.authors.join(', ') : "UnKonow Author"} 
                                 /* =------update-------= */
                                 value={book.shelf ? book.shelf : "move"}
-                                handleUpdateShelf={(event) => handleUpdateShelf(book,event.target.value)}/>
+                                handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)}/>
                             ))}
                         
                         </ol>
@@ -68,7 +62,6 @@ class BookSearch extends Component {
                 </div>
             </div>
         )
-    }
+    
 }
 export default BookSearch;
-// 1. find undefine pic causing an error in the main main page
