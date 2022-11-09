@@ -6,6 +6,7 @@ const MyBooks = (props) => {
       const currentlyReading = props.books.filter(book => book.shelf && book.shelf === "currentlyReading");
       const wantToRead       = props.books.filter(book => book.shelf && book.shelf === "wantToRead");
       const read             = props.books.filter(book => book.shelf && book.shelf === "read");
+      
         return(
         <div>
           <div className="list-books">
