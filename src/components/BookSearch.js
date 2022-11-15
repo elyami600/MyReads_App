@@ -2,19 +2,29 @@ import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
 import * as BooksAPI from '../BooksAPI'
+//import { debounce } from 'throttle-debounce';
 
  export default function BookSearch( { books, handleUpdateShelf } ) {
     const[query , setQuery] = useState('');
     const[searchedBooks, setSearchedBooks] = useState([])
+    console.log("prop.books ", books)
 
     const updateQuery = (query) => {
         setQuery(query)
             if(query.trim().length > 0) {
                 BooksAPI.search(query.trim(),100).then((booksRep) => {
                     if(booksRep.length > 0) {
-                        setSearchedBooks(booksRep)
-                    
-             
+                        booksRep.forEach(bookFound => {
+                            console.log(bookFound)
+                           for(let i = 0; i < books.length; i++) {
+                            if(books[i].id === bookFound.id) {
+                                bookFound.shelf = books[i].shelf
+                            }
+                           
+                           }    
+                        });
+                          setSearchedBooks(booksRep)
+                        
                     } else {
                         setSearchedBooks([])
                     }
@@ -24,10 +34,10 @@ import * as BooksAPI from '../BooksAPI'
             }
     }
 
+
     const searchedStories = searchedBooks.filter(book => 
         book.title.toLowerCase().includes(query.toLowerCase()));
 
-    
     return(
       
         <div>
@@ -60,6 +70,8 @@ import * as BooksAPI from '../BooksAPI'
                             value={books.shelf}
                             handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)}/>
                         ))}
+
+                        
                     
                     </ol>
                 </div>
