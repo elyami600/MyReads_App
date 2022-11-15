@@ -3,28 +3,17 @@ import { Link } from "react-router-dom";
 import BookList from "./BookList";
 import * as BooksAPI from '../BooksAPI'
 
-
-
-
-
  export default function BookSearch( { books, handleUpdateShelf } ) {
     const[query , setQuery] = useState('');
     const[searchedBooks, setSearchedBooks] = useState([])
-   
+
     const updateQuery = (query) => {
         setQuery(query)
             if(query.trim().length > 0) {
                 BooksAPI.search(query.trim(),100).then((booksRep) => {
                     if(booksRep.length > 0) {
-                        searchedBooks.forEach((element) => {
-                            element.shelf = "none";
-                            for(let i  = 0; i< books.length; i++) {
-                                if(element.id === books[i].id) {
-                                    element.shelf = books[i].shelf
-                                }
-                            }
-                        });
                         setSearchedBooks(booksRep)
+                    
              
                     } else {
                         setSearchedBooks([])
@@ -33,14 +22,14 @@ import * as BooksAPI from '../BooksAPI'
             } else {
                 setSearchedBooks([])
             }
-        
     }
-     
+
     const searchedStories = searchedBooks.filter(book => 
         book.title.toLowerCase().includes(query.toLowerCase()));
 
-        
+    
     return(
+      
         <div>
             <div className="search-books">
                 <div className="search-books-bar">
@@ -57,6 +46,7 @@ import * as BooksAPI from '../BooksAPI'
                     /> 
                     </div>
                 </div>
+
                 <div className="search-books-results"> 
                     <ol className="books-grid">
                         {searchedStories.map((book) => (
@@ -78,4 +68,3 @@ import * as BooksAPI from '../BooksAPI'
     )
     
 }
-
