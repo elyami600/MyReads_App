@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-function BookList({ bookey, bookImageLinks, bookTitle, bookAuthors , value, handleUpdateShelf}){
+
+
+const BookList = ({ bookey, bookImageLinks, bookTitle, bookAuthors , value, handleUpdateShelf }) => {
+
         return(
             <div>
                 <li key={bookey}>
@@ -11,7 +14,7 @@ function BookList({ bookey, bookImageLinks, bookTitle, bookAuthors , value, hand
                             <img src={bookImageLinks && bookImageLinks.thumbnail} alt={bookTitle} />
                             </div>
                             <div className="book-shelf-changer">
-                            <select value={value || "none"}   onChange={handleUpdateShelf}>
+                            <select value={value || 'none'}   onChange={handleUpdateShelf}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -22,13 +25,12 @@ function BookList({ bookey, bookImageLinks, bookTitle, bookAuthors , value, hand
                         </div>
                         <div className="book-title">{bookTitle}</div>
                         <div className="book-authors">{bookAuthors}</div>
-                    </div>
-                    
+                    </div>                 
                 </li>
             </div>
-        )
-    
+        )   
 }
+
 BookList.propTypes = {
     bookey: PropTypes.string.isRequired,
     bookImageLinks: PropTypes.object.isRequired ,
