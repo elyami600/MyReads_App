@@ -16,6 +16,7 @@ import * as BooksAPI from '../BooksAPI'
                     if(booksRep.length > 0) {
                         booksRep.forEach(bookFound => {
                             console.log(bookFound)
+                            bookFound.shelf ='none'
                            for(let i = 0; i < books.length; i++) {
                             if(books[i].id === bookFound.id) {
                                 bookFound.shelf = books[i].shelf
@@ -64,10 +65,10 @@ import * as BooksAPI from '../BooksAPI'
                             key={book.id}
                             bookey={book.id}
                             bookImageLinks={book.imageLinks || {}} // if the img is undefine 
-                            bookTitle={book.title}
+                            bookTitle={book.title || book.subtitle}
                             bookAuthors={book.authors ? book.authors.join(', ') : "UnKonow Author"} 
                             /* =------update-------= */
-                            value={books.shelf}
+                            value={book.shelf}
                             handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)}/>
                         ))}
 
