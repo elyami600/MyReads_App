@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
 import * as BooksAPI from '../BooksAPI'
+import PropTypes from 'prop-types';
 //import { debounce } from 'throttle-debounce';
 
  export default function BookSearch( { books, handleUpdateShelf } ) {
@@ -81,3 +82,8 @@ import * as BooksAPI from '../BooksAPI'
     )
     
 }
+
+BookSearch.propTypes = {
+    books: PropTypes.array.isRequired,
+    handleUpdateShelf: PropTypes.func.isRequired
+};
