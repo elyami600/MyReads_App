@@ -6,22 +6,17 @@ import MyBooks from './components/MyBooks'
 import { Route, Routes } from 'react-router-dom'
 
 
+
 const BooksApp = () => {
   const[books, setBooks] = useState([])
   const[showSearchPage, setShowSearchPage] = useState(false)
   
   
-  const NavigatePage = () => {
-    setShowSearchPage((showSearchPage) => !showSearchPage)
-  }
+  // const NavigatePage = () => {
+  //   setShowSearchPage((showSearchPage) => !showSearchPage)
+  // }
 
-  const handleUpdateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf);
-    book.shelf = shelf;
-    setBooks(books.filter(b => b.id !== book.id).concat(book))
-   }
-
-   useEffect(() => {
+  useEffect(() => {
     let unmounted = false;
     const getBooks = async () => {
       const res = await BooksAPI.getAll();
@@ -35,18 +30,24 @@ const BooksApp = () => {
     }
   },[])
 
-  
+  const handleUpdateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf);
+    book.shelf = shelf;
+    setBooks(books.filter(b => b.id !== book.id).concat(book))
+   }
+   console.log('books' ,books)
+
     return (
       <div className="app">
          <Routes>
           <Route exact path='/' element={
             <MyBooks 
             books={books}
-            onNavigate={NavigatePage}
             handleUpdateShelf={handleUpdateShelf}
+            // onNavigate={NavigatePage}
+            onClick={() => setShowSearchPage(!showSearchPage)}
             />
           }/>
-
           <Route exact path='/search' element={
             <BookSearch
             books={books}
@@ -60,3 +61,5 @@ const BooksApp = () => {
 }
 
 export default BooksApp
+
+
