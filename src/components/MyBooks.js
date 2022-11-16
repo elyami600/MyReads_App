@@ -6,6 +6,8 @@ const MyBooks = (props) => {
       const currentlyReading = props.books.filter(book => book.shelf && book.shelf === "currentlyReading");
       const wantToRead       = props.books.filter(book => book.shelf && book.shelf === "wantToRead");
       const read             = props.books.filter(book => book.shelf && book.shelf === "read");
+
+      //const booksFiltered = props.books.filter(book => book.shelf === props.shelf);
       
         return(
         <div>
@@ -42,9 +44,9 @@ const MyBooks = (props) => {
                       <BookList 
                       key={book.id}
                       bookey={book.id}
-                      bookImageLinks={book.imageLinks}
+                      bookImageLinks={book.imageLinks || {}} // if the img is undefine 
                       bookTitle={book.title}
-                      bookAuthors={book.authors} 
+                      bookAuthors={book.authors ? book.authors.join(', ') : "UnKonow Author"} 
                       /* =------update-------= */
                       value={book.shelf}
                     
