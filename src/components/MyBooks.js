@@ -23,15 +23,11 @@ const MyBooks = (props) => {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     {currentlyReading.map((book) => currentlyReading && (
-                      <BookList 
-                      key={book.id}
-                      bookey={book.id}
-                      bookImageLinks={book.imageLinks}
-                      bookTitle={book.title}
-                      bookAuthors={book.authors} 
-                      /* =------update-------= */
-                      value={book.shelf}
-                      handleUpdateShelf={(event) => props.handleUpdateShelf(book,event.target.value)}/>
+                     <li key={book.id}>
+                     <BookList
+                     book={book}  
+                    handleUpdateShelf={(event) => props.handleUpdateShelf(book, event.target.value)} />
+                     </li>
                     ))}
                     </ol>
                   </div>
@@ -41,16 +37,11 @@ const MyBooks = (props) => {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     {wantToRead.map((book) => wantToRead && (
-                      <BookList 
-                      key={book.id}
-                      bookey={book.id}
-                      bookImageLinks={book.imageLinks || {}} // if the img is undefine 
-                      bookTitle={book.title}
-                      bookAuthors={book.authors ? book.authors.join(', ') : "UnKonow Author"} 
-                      /* =------update-------= */
-                      value={book.shelf}
-                    
-                      handleUpdateShelf={(event) => props.handleUpdateShelf(book,event.target.value)}/>
+                     <li key={book.id}>
+                     <BookList
+                     book={book}  
+                      handleUpdateShelf={(event) => props.handleUpdateShelf(book, event.target.value)} />
+                     </li>
                     ))}
                     </ol>
                   </div>
@@ -60,15 +51,11 @@ const MyBooks = (props) => {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                     {read.map((book) =>  read && (
-                      <BookList 
-                      key={book.id}
-                      bookey={book.id}
-                      bookImageLinks={book.imageLinks}
-                      bookTitle={book.title}
-                      bookAuthors={book.authors} 
-                      /* =------update-------= */
-                      value={book.shelf}
-                      handleUpdateShelf={(event) => props.handleUpdateShelf(book,event.target.value)}/>
+                     <li key={book.id}>
+                     <BookList
+                     book={book}  
+                    handleUpdateShelf={(event) => props.handleUpdateShelf(book, event.target.value)} />
+                     </li>
                     ))}
                     </ol>
                   </div>
