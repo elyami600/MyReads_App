@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
 
-const MyBooks = (props) => {
-      const currentlyReading = props.books.filter(book => book.shelf && book.shelf === "currentlyReading");
-      const wantToRead       = props.books.filter(book => book.shelf && book.shelf === "wantToRead");
-      const read             = props.books.filter(book => book.shelf && book.shelf === "read");
+const MyBooks = ({books, handleUpdateShelf, onNavigate}) => {
+      const currentlyReading = books.filter(book => book.shelf && book.shelf === "currentlyReading");
+      const wantToRead       = books.filter(book => book.shelf && book.shelf === "wantToRead");
+      const read             = books.filter(book => book.shelf && book.shelf === "read");
 
       //const booksFiltered = props.books.filter(book => book.shelf === props.shelf);
       
@@ -26,7 +26,7 @@ const MyBooks = (props) => {
                      <li key={book.id}>
                      <BookList
                      book={book}  
-                    handleUpdateShelf={(event) => props.handleUpdateShelf(book, event.target.value)} />
+                    handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)} />
                      </li>
                     ))}
                     </ol>
@@ -40,7 +40,7 @@ const MyBooks = (props) => {
                      <li key={book.id}>
                      <BookList
                      book={book}  
-                      handleUpdateShelf={(event) => props.handleUpdateShelf(book, event.target.value)} />
+                      handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)} />
                      </li>
                     ))}
                     </ol>
@@ -54,7 +54,7 @@ const MyBooks = (props) => {
                      <li key={book.id}>
                      <BookList
                      book={book}  
-                    handleUpdateShelf={(event) => props.handleUpdateShelf(book, event.target.value)} />
+                    handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)} />
                      </li>
                     ))}
                     </ol>
@@ -63,7 +63,7 @@ const MyBooks = (props) => {
               </div>
             </div>
              <div className="open-search">
-              <Link to='/search' onClick={() => props.onNavigate}>Add a book</Link>
+              <Link to='/search' onClick={() => onNavigate}>Add a book</Link>
             </div>
           </div>
           
