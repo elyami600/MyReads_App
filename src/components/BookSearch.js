@@ -49,7 +49,6 @@ import PropTypes from 'prop-types';
                 <button className="close-search" >Close</button>
                 </Link>
                     <div className="search-books-input-wrapper">
-                    {/* {JSON.stringify(this.state)} */}
                     <input 
                     type="text"
                     placeholder="Search by title or author"
@@ -62,19 +61,13 @@ import PropTypes from 'prop-types';
                 <div className="search-books-results"> 
                     <ol className="books-grid">
                         {searchedStories.map((book) => (
-                            <BookList 
+                           <li key={book.id}>
+                            <BookList
                             key={book.id}
-                            bookey={book.id}
-                            bookImageLinks={book.imageLinks || {}} // if the img is undefine 
-                            bookTitle={book.title || book.subtitle}
-                            bookAuthors={book.authors ? book.authors.join(', ') : "UnKonow Author"} 
-                            /* =------update-------= */
-                            value={book.shelf}
-                            handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)}/>
+                            book={book}  
+                             handleUpdateShelf={(event) => handleUpdateShelf(book, event.target.value)} />
+                            </li>
                         ))}
-
-                        
-                    
                     </ol>
                 </div>
             </div>
@@ -82,8 +75,8 @@ import PropTypes from 'prop-types';
     )
     
 }
-
 BookSearch.propTypes = {
     books: PropTypes.array.isRequired,
     handleUpdateShelf: PropTypes.func.isRequired
 };
+
