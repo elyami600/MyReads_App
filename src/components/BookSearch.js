@@ -34,7 +34,7 @@ import PropTypes from 'prop-types';
             } else {
                 setSearchedBooks([])
             }
-    }
+    };
 
 
     const searchedStories = searchedBooks.filter(book => 

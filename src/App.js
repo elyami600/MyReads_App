@@ -12,9 +12,9 @@ const BooksApp = () => {
   const[showSearchPage, setShowSearchPage] = useState(false)
   
   
-  // const NavigatePage = () => {
-  //   setShowSearchPage((showSearchPage) => !showSearchPage)
-  // }
+  const NavigatePage = () => {
+    setShowSearchPage((showSearchPage) => !showSearchPage)
+  }
 
   useEffect(() => {
     let unmounted = false;
@@ -44,8 +44,8 @@ const BooksApp = () => {
             <MyBooks 
             books={books}
             handleUpdateShelf={handleUpdateShelf}
-            // onNavigate={NavigatePage}
-            onClick={() => setShowSearchPage(!showSearchPage)}
+            onNavigate={NavigatePage}
+            // onClick={() => setShowSearchPage(!showSearchPage)}
             />
           }/>
           <Route exact path='/search' element={
